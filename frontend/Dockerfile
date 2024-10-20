@@ -1,5 +1,5 @@
 # Étape 1: Construire le frontend avec Node.js
-FROM node:16 AS build
+FROM node:18 as build
 
 WORKDIR /app
 COPY . /app   
