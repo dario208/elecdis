@@ -1,19 +1,19 @@
-# Étape 1: Construire le frontend
+# Étape 1: Construire le frontend avec Node.js
 FROM node:16 AS build
 
 WORKDIR /app
-COPY ./frontend /app
+COPY . /app   
 RUN npm install
-RUN npm run build   # ou `vite build`
+RUN npm run build  
 
-# Étape 2: Utiliser Nginx pour servir les fichiers statiques
+# Étape 2: Utiliser Nginx pour servir le contenu statique
 FROM nginx:alpine
 
-# Copier le build du frontend depuis l'étape précédente
+# Copier les fichiers build du frontend vers Nginx
 COPY --from=build /app/dist /usr/share/nginx/html
 
 # Exposer le port 80
 EXPOSE 80
 
-# Commande par défaut pour démarrer Nginx
+# Démarrer Nginx
 CMD ["nginx", "-g", "daemon off;"]
