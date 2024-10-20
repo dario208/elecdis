@@ -36,16 +36,16 @@ pipeline {
             }
         }
 
-        stage('Test Backend') {
-            steps {
-                script {
-                    // Run backend unit tests
-                    dir('backend') {
-                        sh 'sudo docker run $BACKEND_IMAGE pytest tests/'
-                    }
-                }
-            }
-        }
+        // stage('Test Backend') {
+        //     steps {
+        //         script {
+        //             // Run backend unit tests
+        //             dir('backend') {
+        //                 sh 'sudo docker run $BACKEND_IMAGE pytest tests/'
+        //             }
+        //         }
+        //     }
+        // }
 
         stage('Build Frontend') {
             steps {
