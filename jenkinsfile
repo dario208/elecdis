@@ -30,7 +30,7 @@ pipeline {
                 script {
                     // Build the backend Docker image
                     dir('backend') {
-                        sh 'docker build -t $BACKEND_IMAGE .'
+                        sh 'sudo docker build -t $BACKEND_IMAGE .'
                     }
                 }
             }
@@ -41,7 +41,7 @@ pipeline {
                 script {
                     // Run backend unit tests
                     dir('backend') {
-                        sh 'docker run $BACKEND_IMAGE pytest tests/'
+                        sh 'sudo docker run $BACKEND_IMAGE pytest tests/'
                     }
                 }
             }
@@ -52,7 +52,7 @@ pipeline {
                 script {
                     // Build the frontend Docker image
                     dir('frontend') {
-                        sh 'docker build -t $FRONTEND_IMAGE .'
+                        sh 'sudo docker build -t $FRONTEND_IMAGE .'
                     }
                 }
             }
@@ -63,7 +63,7 @@ pipeline {
                 script {
                     // Build the WebSocket service Docker image
                     dir('websocket') {
-                        sh 'docker build -t $WEBSOCKET_IMAGE .'
+                        sh 'sudo docker build -t $WEBSOCKET_IMAGE .'
                     }
                 }
             }
@@ -74,7 +74,7 @@ pipeline {
                 script {
                     // Build the Nginx image that serves frontend and proxies backend
                     dir('nginx') {
-                        sh 'docker build -t $NGINX_IMAGE .'
+                        sh 'sudo docker build -t $NGINX_IMAGE .'
                     }
                 }
             }
@@ -84,8 +84,8 @@ pipeline {
             steps {
                 script {
                      // Mettre à jour et démarrer les services Docker en local
-                    sh 'docker-compose pull'     // Télécharge les images les plus récentes
-                    sh 'docker-compose up -d'   // Démarre les conteneurs en arrière-plan
+                    sh 'sudo docker-compose pull'     // Télécharge les images les plus récentes
+                    sh 'sudo docker-compose up -d'   // Démarre les conteneurs en arrière-plan
                     // Push images to Docker registry (optional)
                     // withCredentials([usernamePassword(credentialsId: "${DOCKER_CREDENTIALS_ID}", passwordVariable: 'DOCKER_PASS', usernameVariable: 'DOCKER_USER')]) {
                     //     sh 'docker login -u $DOCKER_USER -p $DOCKER_PASS'
