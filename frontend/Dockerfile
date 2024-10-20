@@ -1,28 +1,19 @@
-# # Utiliser une image Node.js officielle comme image de base
- FROM node:18
- # Définir le répertoire de travail dans le conteneur
- WORKDIR /app
- # Copier le fichier package.json et package-lock.json (ou yarn.lock) au répertoire de travail
- COPY package*.json ./
- # Installer les dépendances
- RUN npm install
- RUN npm run build
- # Copier le reste des fichiers du projet au répertoire de travail
- COPY . .
- # Exposer le port 8000
- EXPOSE 8000
- # Commande par défaut pour démarrer l'application en mode développement
- CMD ["npm", "run", "dev"]
+# Étape 1: Construire le frontend
+FROM node:16 AS build
 
+WORKDIR /app
+COPY ./frontend /app
+RUN npm install
+RUN npm run build   # ou `vite build`
 
-# Utilise l'image officielle Nginx
+# Étape 2: Utiliser Nginx pour servir les fichiers statiques
 FROM nginx:alpine
 
-# Copie le contenu du dossier dist dans le répertoire par défaut de Nginx
+# Copier le build du frontend depuis l'étape précédente
 COPY --from=build /app/dist /usr/share/nginx/html
 
-# Expose le port 80
+# Exposer le port 80
 EXPOSE 80
 
-# Démarre Nginx
+# Commande par défaut pour démarrer Nginx
 CMD ["nginx", "-g", "daemon off;"]
