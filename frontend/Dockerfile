@@ -6,6 +6,7 @@
  COPY package*.json ./
  # Installer les dépendances
  RUN npm install
+ RUN npm run build
  # Copier le reste des fichiers du projet au répertoire de travail
  COPY . .
  # Exposer le port 8000
@@ -18,7 +19,7 @@
 FROM nginx:alpine
 
 # Copie le contenu du dossier dist dans le répertoire par défaut de Nginx
-COPY ./dist /usr/share/nginx/html
+COPY --from=build /app/dist /usr/share/nginx/html
 
 # Expose le port 80
 EXPOSE 80
