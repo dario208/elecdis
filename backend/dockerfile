@@ -7,7 +7,7 @@ WORKDIR /app
 
 # Copier les fichiers de configuration et les dépendances
 COPY requirements.txt requirements.txt
-COPY .env ./
+COPY .env.backend .env
 
 # Installer les dépendances et nettoyer les fichiers temporaires pour minimiser la taille de l'image
 RUN pip install -r requirements.txt \
@@ -18,7 +18,7 @@ COPY . .
 COPY alembic.ini alembic/
 
 # Exposer le port de l'application
-EXPOSE 8080
+EXPOSE 8085
 
 # Démarrer l'application
-CMD ["uvicorn", "core.main:app", "--host", "0.0.0.0", "--port", "8080"]
+CMD ["uvicorn", "core.main:app", "--host", "0.0.0.0", "--port", "8085"]
