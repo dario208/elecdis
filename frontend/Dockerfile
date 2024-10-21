@@ -4,7 +4,8 @@ FROM node:18 as build
 WORKDIR /app
 COPY . /app   
 RUN npm install
-RUN npm run build  
+RUN npm run build --verbose
+
 
 # Étape 2: Utiliser Nginx pour servir le contenu statique
 FROM nginx:alpine
