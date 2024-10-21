@@ -1,15 +1,15 @@
 # Étape 1: Construire le frontend avec Node.js
-FROM node:18 as build
+# FROM node:18 as build
 
-WORKDIR /app
-COPY . /app   
-RUN npm install
-RUN npm run build 
-COPY . .
-# Exposer le port 8000
-EXPOSE 8000
-# Commande par défaut pour démarrer l'application en mode développement
-CMD ["npm", "run", "dev"]
+# WORKDIR /app
+# COPY . /app   
+# RUN npm install
+# RUN npm run build 
+# COPY . .
+# # Exposer le port 8000
+# EXPOSE 8000
+# # Commande par défaut pour démarrer l'application en mode développement
+# CMD ["npm", "run", "dev"]
 
 # Étape 2: Utiliser Nginx pour servir le contenu statique
 FROM nginx:alpine

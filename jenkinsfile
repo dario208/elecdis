@@ -52,7 +52,9 @@ pipeline {
                 script {
                     // Build the frontend Docker image
                     dir('frontend') {
-                        sh 'sudo docker build -t $FRONTEND_IMAGE .'
+                        // sh 'sudo docker build -t $FRONTEND_IMAGE .'
+                        sh 'npm install'
+                        sh 'npm run build'
                     }
                 }
             }
