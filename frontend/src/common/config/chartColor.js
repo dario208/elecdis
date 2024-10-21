@@ -1,0 +1,9 @@
+export const COLOR_PRIMARY = "F2505D";
+export const MENU_ACTIVE_BG = "F2B3B3";
+export const SIMPLE_TEXT = "637381";
+export const IMPORTANT_TEXT = "212B36";
+export const DANGER_TEXT = "B71D12";
+export const SUCCESS = "36E73D";
+export const SUCCESS_BG_OP = "36E73D";
+export const ACTIF = "007867";
+export const ACTIF_BG = "00A76F";
